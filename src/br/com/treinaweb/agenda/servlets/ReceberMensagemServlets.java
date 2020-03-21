@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class EscrevaSeuNomeServlet extends HttpServlet {
+public class ReceberMensagemServlets extends HttpServlet {
 
 	/**
 	 * 
@@ -18,21 +18,22 @@ public class EscrevaSeuNomeServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		// informações da requisições para o nosso Servlets(input, etc)
+		// GetParameter = permite ler informações enviadas dentro do form
+		String nomeUsuario = request.getParameter("nomeUsuario");
+
 		PrintWriter out = response.getWriter();
-		
 		
 		out.println("<html>");
 		out.println("	<head>");
-		out.println("		<title>Nome do Usuário...</title>");
+		out.println("		<title>Nome do Usuário></title>");
 		out.println("	</head>");
 		out.println("	<body>");
-		out.println("	<h1>Nome do Usuário</h1>");
-		out.println("	<form action = \"/Tw-agenda-servlets/receberMensagem\" >");
-		out.println("		<p>Digite seu nome:</p>");
-		out.println("		<p><input type \"text\" name = \"nomeUsuario\"></p>");
-		out.println("		<p><button type = \"submit\">Enviar</button></p>");
-		out.println("	</form>");
-		out.println("	</body>");	
+		out.println("		<h1>Exibindo Nome do Usuário</h1>");
+		out.println("		<p>Olá, "+ nomeUsuario + "</p>");
+		out.println("	<body>");
+		out.println("	</body>");
 		out.println("</html>");
 	}
 
