@@ -3,6 +3,8 @@
 	<name>Tw-agenda-servlets</name>
 	<comment></comment>
 	<projects>
+		<project>tw-agenda-entidades</project>
+		<project>tw-agenda-repositorios</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
