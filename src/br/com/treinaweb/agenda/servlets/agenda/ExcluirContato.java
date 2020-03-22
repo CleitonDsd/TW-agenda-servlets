@@ -2,9 +2,7 @@ package br.com.treinaweb.agenda.servlets.agenda;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,8 +13,8 @@ import br.com.treinaweb.agenda.entidades.Contato;
 import br.com.treinaweb.agenda.repositorios.impl.ContatoRepositorioJdbc;
 import br.com.treinaweb.agenda.repositorios.interfaces.AgendaRepositorio;
 
-@WebServlet(urlPatterns = { "/agenda/listar" })
-public class ListaContatoServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/agenda/excluir" })
+public class ExcluirContato extends HttpServlet {
 
 	/**
 	 * 
@@ -25,23 +23,17 @@ public class ListaContatoServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		int idContato = Integer.parseInt(req.getParameter("id"));
+		Contato contatoExcluido = new Contato();
+		contatoExcluido.setId(idContato);
 		AgendaRepositorio<Contato> agendaRepositorio = new ContatoRepositorioJdbc();
 		try {
-			List<Contato> contatos = agendaRepositorio.selecionar();
-			req.setAttribute("listaContatos", contatos);
-
+			agendaRepositorio.excluir(contatoExcluido);
 		} catch (SQLException e) {
-			req.setAttribute("mensagemErro", e.getMessage());
+			req.getSession().setAttribute("mensagemErro", e.getMessage());
 		}
-		Object mensagemErro = req.getSession().getAttribute("mensagemErro");
-		if (mensagemErro != null) {
-			req.setAttribute("mensagemerro", mensagemErro.toString());
-			req.getSession().removeAttribute("mensagemErro");
-		}
-		RequestDispatcher dispatcher = req.getServletContext()
-				.getRequestDispatcher("/WEB-INF/paginas/agenda/listaContatos.jsp");
-		dispatcher.forward(req, resp);
+		resp.sendRedirect(req.getContextPath() + "/agenda/listar");
+
 	}
 
 }
