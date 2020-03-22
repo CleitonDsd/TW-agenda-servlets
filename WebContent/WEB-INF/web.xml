@@ -48,6 +48,15 @@
 		<url-pattern>/mensagem</url-pattern>
 	</servlet-mapping>
 
+	<!-- Servlet de Treino, treino - Ano de Nascimento -->
+	<servlet>
+		<servlet-name>DigiteAnoNascTreino</servlet-name>
+		<servlet-class>br.com.treinaweb.agenda.servlets.DigiteAnoNascTreino</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DigiteAnoNascTreino</servlet-name>
+		<url-pattern>/nascimento</url-pattern>
+	</servlet-mapping>
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
