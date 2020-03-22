@@ -42,6 +42,7 @@ public class InserirContatoServlet extends HttpServlet {
 		try {
 			agendaRepositorio.inserir(novoContato);
 		} catch (SQLException e) {
+			//sessão para alertar caso de erro durante a inserção 
 			req.getSession().setAttribute("mensagemErro", e.getMessage());
 		}
 		RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/agenda/listar");
