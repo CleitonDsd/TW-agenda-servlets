@@ -34,6 +34,10 @@ public class ListaContatoServlet extends HttpServlet {
 		} catch (SQLException e) {
 			req.setAttribute("mensagemErro", e.getMessage());
 		}
+		Object mensagemErro = req.getSession().getAttribute("mensagemErro");
+		if (mensagemErro != null) {
+			req.setAttribute("mensagemerro", mensagemErro.toString());
+		}
 		RequestDispatcher dispatcher = req.getServletContext()
 				.getRequestDispatcher("/WEB-INF/paginas/agenda/listaContatos.jsp");
 		dispatcher.forward(req, resp);
